@@ -7,6 +7,7 @@
   * [OAuth 2.0 API](#oauth-20-api)
   * [Slack Web API](#slack-web-api)
   * [Splunk API](#splunk-api)
+  * [Tableau API](#tableau-api)
 * [Contributing](#contributing)
 
 ## Introduction
@@ -216,6 +217,42 @@ to the backend server uses SSL.
 </details>
 
 ___
+
+### Tableau API
+This example can be used to interact with [Tableau's API](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm).
+
+The configuraton file for the Tableau API can be found at [tableau_secretless.yml](./tableau_secretless.yml).
+
+#### How to use this connector
+* Create an account for Tableau Online
+* Make a request to Tableu's API to get an [`X-Tableau-Auth`](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_concepts_auth.htm) token.
+
+#### Example Usage
+<details>
+  <summary><b>How to use this connector locally</b></summary>
+  <ol>
+    <li>Create an account on
+      <a href="https://www.tableau.com/products/cloud-bi#form">Tableau Online</a>
+    </li>
+    <li>
+      <a href="https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_get_started_tutorial_part_1.htm#step-1-sign-in-to-your-server-with-rest">
+        Make a POST request
+      </a>
+      to Tableau Online's API using the provided credentials to secure a
+      <code>
+        X-Tableau-Auth
+      </code>
+      token
+    </li>
+    <li>Save the local token from Tableau to the OSX keychain.</li>
+    <li>On another terminal window, make a request to Tableau using Secretless
+      <br />
+      <code>
+        http_proxy=localhost:8071 curl -d {data} {Tableau Endpoint URL}
+      </code>
+    </li>
+  </ol>
+</details>
 
 ## Contributing
 
