@@ -7,6 +7,7 @@
   * [OAuth 2.0 API](#oauth-20-api)
   * [Slack Web API](#slack-web-api)
   * [Splunk API](#splunk-api)
+  * [Stripe API](#stripe-api)
 * [Contributing](#contributing)
 
 ## Introduction
@@ -212,6 +213,40 @@ to the backend server uses SSL.
     </code>
     <li>On another terminal window, make a request to Splunk using Secretless</li>
     <code>http_proxy=localhost:8081 curl -k -X GET SplunkServerDefaultCert:8089/services/apps/local</code>
+  </ol>
+</details>
+
+___
+
+### Stripe API
+This example can be used to interact with [Stripe's API](https://stripe.com/docs/api).
+
+The configuration file for the Splunk Web API can be found at [stripe_secretless.yml](./stripe_secretless.yml).
+
+#### How to use this connector
+* Get the [Stripe API Key](https://dashboard.stripe.com/apikeys), which can be used as a Bearer token
+* Get an [connected account](https://stripe.com/docs/connect/authentication) or generate an [idempotency key](https://stripe.com/docs/api/idempotent_requests) if needed
+* Query the Striple API using `http_proxy=localhost:80*1 curl api.slack.com/{route}`.
+This example supports several header configurations, so it is recommended to
+look at [stripe_secretless.yml](./stripe_secretless.yml) to figure out which
+one should be used.
+
+#### Example Usage
+<details>
+  <summary><b>How to use this connector locally</b></summary>
+  <ol>
+    <li>Get the Stripe test [API Key](https://dashboard.stripe.com/apikeys)</li>
+    <li>Save the local token from Slack into the OSX keychain</li>
+    <li>Run Secretless locally</li>
+    <code>
+    ./dist/darwin/amd64/secretless-broker \
+    <br />
+    -f examples/generic_connector_configs/stripe_secretless.yml
+    </code>
+    <li>On another terminal window, make a request to Stripe using Secretless</li>
+    <code>
+    http_proxy=localhost:8071 curl api.stripe.com/v1/charges
+    </code>
   </ol>
 </details>
 
